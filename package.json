@@ -1,0 +1,17 @@
+{
+  "name": "choco_client",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "author": "Fevret",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node-powershell": "^4.0.1",
+    "node-powershell": "^4.0.0",
+    "ts-node": "^10.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
