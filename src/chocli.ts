@@ -14,12 +14,12 @@ export class Chocli implements IChocli {
   }
 
   async setup(): Promise<void> {
-    console.log(await this.isInstalled())
     if (await this.isInstalled()) {
       console.log("Installed...");
       await this.verifyAndUpdate();
+      console.log("Updated...");
     } else {
-      console.log("Chocolatey is ot installed. Installing...");
+      console.log("Chocolatey is not installed. Installing...");
       await this.install();
     }
   }
@@ -30,8 +30,6 @@ export class Chocli implements IChocli {
     try {
       const output = await this.ps.invoke();
       this.chocoVersion = output;
-
-      console.log(output);
       return true;
     } catch (err) {
       console.log(err);
@@ -46,14 +44,16 @@ export class Chocli implements IChocli {
     try {
       await this.ps.invoke();
     } catch (err) {
-      console.log("Error during installation", err);
+      console.log("Error during installation. Please try manually", err);
     }
   }
 
   async verifyAndUpdate(): Promise<void> {
     try {
+      console.log("Verifying Chocolatey...");
       this.ps.addCommand("choco upgrade chocolatey");
-      console.log(await this.ps.invoke());
+      this.ps.addCommand("y");
+      console.log(this.ps.invoke());
     } catch (err) {
       console.log("Error during update", err);
     }
